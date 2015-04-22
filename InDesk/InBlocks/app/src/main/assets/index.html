@@ -1,0 +1,223 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Blockly for Inbot</title>
+    <script src="js/blockly_compressed.js"></script>
+    <script src="js/blocks_compressed.js"></script>
+    <script src="js/inbot.js"></script>
+    <script src="js/en.js"></script>
+    <script src="js/acorn_interpreter.js"></script>
+    <script src="js/javascript_compressed.js"></script>
+    <script src="js/inbot_javascript.js"></script>
+    <style>
+      html, body {
+        background-color: #fff;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        height: 100%;
+      }
+      .blocklySvg {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <p>
+      <button onclick="parseCode()">Play</button>
+      <button onclick="stepCode()" id="stepButton" disabled="disabled">Step</button>
+    </p>
+
+    <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+    <xml id="toolbox" style="display: none">
+      <block type="inbot_move"></block>
+      <block type="inbot_forward"></block>
+      <block type="inbot_backward"></block>
+      <block type="inbot_left"></block>
+      <block type="inbot_right"></block>
+      <block type="inbot_stop"></block>
+    </xml>
+
+    <script>
+      Blockly.inject(document.getElementById('blocklyDiv'),
+        { media: 'media/',
+          toolbox: document.getElementById('toolbox')});
+
+      var myInterpreter = null;
+      var command = '0';
+
+      function initApi(interpreter, scope) {
+        // Add an API function for the alert() block.
+        var wrapper = function(text) {
+          text = text ? text.toString() : '';
+          command = text;
+          console.log(command);
+          // return interpreter.createPrimitive(alert(text));
+          // alert(command);
+          if (typeof Android != 'undefined')
+            Android.setCommand(command);
+          return null;
+        };
+        interpreter.setProperty(scope, 'alert',
+            interpreter.createNativeFunction(wrapper));
+
+        // Add an API function for the prompt() block.
+        var wrapper = function(text) {
+          text = text ? text.toString() : '';
+          return interpreter.createPrimitive(prompt(text));
+        };
+        interpreter.setProperty(scope, 'prompt',
+            interpreter.createNativeFunction(wrapper));
+
+        // Add an API function for highlighting blocks.
+        var wrapper = function(id) {
+          id = id ? id.toString() : '';
+          return interpreter.createPrimitive(highlightBlock(id));
+        };
+        interpreter.setProperty(scope, 'highlightBlock',
+            interpreter.createNativeFunction(wrapper));
+      }
+
+      var highlightPause = false;
+
+      function highlightBlock(id) {
+        Blockly.mainWorkspace.highlightBlock(id);
+        highlightPause = true;
+      }
+
+      function parseCode() {
+        // Generate JavaScript code and parse it.
+        Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+        Blockly.JavaScript.addReservedWords('highlightBlock');
+        var code = Blockly.JavaScript.workspaceToCode();
+        myInterpreter = new Interpreter(code, initApi);
+
+        //alert('Ready to execute this code:\n\n' + code);
+        document.getElementById('stepButton').disabled = '';
+        highlightPause = false;
+        Blockly.mainWorkspace.traceOn(true);
+        Blockly.mainWorkspace.highlightBlock(null);
+      }
+
+      function stepCode() {
+        try {
+          var ok = myInterpreter.step();
+          // alert(command);
+        } finally {
+          if (!ok) {
+            // Program complete, no more code to execute.
+            document.getElementById('stepButton').disabled = 'disabled';
+            command = '0';
+            return;
+          }
+        }
+        if (highlightPause) {
+          // A block has been highlighted.  Pause execution here.
+          highlightPause = false;
+        } else {
+          // Keep executing until a highlight statement is reached.
+          stepCode();
+
+        }
+      }
+
+    </script>
+  </body> 
+</html>  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="js/blockly_compressed.js"></script>
+  <script src="js/blocks_compressed.js"></script>
+  <script src="js/en.js"></script>
+  <script src="js/inbot.js"></script>
+  <script src="js/acorn_interpreter.js"></script>
+  <script src="js/javascript_compressed.js"></script>
+  <script src="js/inbot_javascript.js"></script>
+
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+  </style>
+</head>
+
+<body>
+  <p>
+    <button onclick="run()">Run</button>
+    <button onclick="reset()" id="resetButton" disabled="disabled">Reset</button>
+  </p>
+
+  <div id="blocklyDiv" style="height: 220px; width: 600px;"></div>
+
+  <xml id="toolbox" style="display: none">
+    <!-- <category name="Drive"> -->
+      <!-- <block type="drive_move"></block> -->
+    <!-- </category> -->
+    <!-- <category name="Sound"> -->
+      <block type="sound_play"></block>
+    <!-- </category> -->
+    <!-- <category name="Control"> -->
+    <!-- </category> -->
+  </xml>
+
+  <script>
+    Blockly.inject(document.getElementById('blocklyDiv'),
+                    { media: 'media/',
+                      toolbox: document.getElementById('toolbox')
+                    } 
+                  );
+
+    var myInterpreter = null;
+
+    function initApi(interpreter, scope) {
+      // API
+      var wrapper;
+      wrapper = function(distance) {
+        distance = distance ? distance.toString() : '';
+        if (typeof Android != 'undefined')
+          Android.moveForward(distance);
+      };
+      interpreter.setProperty(scope, 'moveForward',
+      interpreter.createNativeFunction(wrapper));
+  
+      wrapper = function(distance) {
+        distance = distance ? distance.toString() : '';
+        if (typeof Android != 'undefined')
+          Android.moveBackward(distance);
+      };
+      interpreter.setProperty(scope, 'moveBackward',
+      interpreter.createNativeFunction(wrapper));
+
+      wrapper = function(note, beat) {
+        note = note ? note.toString() : '';
+        beat = beat ? beat.toString() : '';
+        if (typeof Android != 'undefined')
+          Android.play(note, beat);
+      };
+      interpreter.setProperty(scope, 'play',
+      interpreter.createNativeFunction(wrapper));
+    }
+
+    function run() {
+      var code = Blockly.JavaScript.workspaceToCode();
+      myInterpreter = new Interpreter(code, initApi);
+      myInterpreter.run();
+    }
+
+  </script>
+
+</body>
+</html>
