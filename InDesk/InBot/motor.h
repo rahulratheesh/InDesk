@@ -18,32 +18,13 @@ class Motor
     
     Motor();
     
-    /**
-     * @brief Drives the motor.
-     * @param speed The new speed of the motor.
-     * Valid values are between -255 and 255.
-     * Use positive values to run the motor forward,
-     * negative values to run it backward and zero to stop the motor.
-    */
-    void drive(int speed);
-    
-    /**
-     * @brief Turns the motor.
-     * @param angle The angle of turn.
-     * Valid values are between -255 and 255.
-     * Use positive values to turn the motor right,
-     * negative values to turn it left and zero to stop the motor.
-    */
-    void turn(int speed);
-    
-    /**
-    * @brief Return the current speed of the motor.
-    * @return The current speed of the motor with range -255 to 255.
-    */
-    int getSpeed();
+    void forward(int time, int speed);
+    void backward(int time, int speed);
+    void stopWheels();
+    void left(int time);
+    void right(int time);
     
   private:
-    int speed;
     
     void leftFwd(int speed); 
     void leftRev(int speed);
@@ -51,6 +32,8 @@ class Motor
     void rightRev(int speed);
     void leftStop();
     void rightStop();
+    void turnLeft(int time, int speed);
+    void turnRight(int time, int speed);
 };
 
 #endif

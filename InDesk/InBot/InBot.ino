@@ -21,12 +21,12 @@ Bluetooth bluetooth;
 class InBot {
   
   public:
-    InBot() : motors(), ultrasonicSensor(ULTRASONIC_SENSOR_INIT), sensorAverage(MAX_DISTANCE) {
+    InBot() : buzzer(), motors(), ultrasonicSensor(ULTRASONIC_SENSOR_INIT), sensorAverage(MAX_DISTANCE) {
       init();
     }
     
     void init() {
-      motors.drive(0);
+      motors.stopWheels();
       state = STOPPED;
       startTime = millis();
     }
@@ -34,23 +34,9 @@ class InBot {
 
     
     void run() {
-//      int distance = sensorAverage.add(ultrasonicSensor.getDistance());
-//      if (distance <= TOO_CLOSE) {
-//        state = OBSTACLE;
-//        motors.drive(0);
-//      }
-//      else {
-//        state = MOVING;
-//        motors.drive(255);
-//      }
-  
-//      char notes[] = "ccggaag-ffeeddc "; // a space represents a rest
-//      int beats[] = { 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 4 };  
-//      for (int i = 0; i < 16; i++) {
-//        buzzer.playNote(notes[i], beats[i]);
-//      }
-
+      
       bool haveRemoteCmd = bluetooth.getRemoteCommand(pkt);
+      
       if (haveRemoteCmd) {
         process(pkt);
       }
@@ -59,74 +45,64 @@ class InBot {
     
   protected:
     
-    
-//    void turn(int angle) {
-//      if (angle > 0) {
-//        motors.drive(200);
-//      } else if (angle < 0) {
-//        motors.drive(-200);
-//      } else {
-//        motors.drive(0);
-//      }
-//      startTime = millis();
-//      state = TURNING;
-//    }
-//    
-//    bool moving() { 
-//      return (state == MOVING); 
-//    }
-//    
-//    bool turning() { 
-//      return (state == TURNING); 
-//    }
-//    
-//    bool stopped() { 
-//      return (state == STOPPED); 
-//    }
-
       void process(Wireless::packet& pkt) { 
+        
         if (pkt.comm == "PLAY") {
           char note = pkt.arg1.charAt(0);
           int beat = pkt.arg2.toInt();
           buzzer.playNote(note, beat);
         }
+        
+        if (pkt.comm == "FORWARD") {
+          int time = pkt.arg1.toInt();
+          int distance = pkt.arg2.toInt();
+          motors.forward(time, distance);
+          state = MOVING;
+        }
+        
+        if (pkt.comm == "BACKWARD") {
+          int time = pkt.arg1.toInt();
+          int distance = pkt.arg2.toInt();
+          motors.backward(time, distance);
+          state = MOVING;
+        }
+        
+        if (pkt.comm == "STOP") {
+          motors.stopWheels();
+          state = STOPPED;
+        }
+        
+        if (pkt.comm == "LEFT") {
+          int angle = pkt.arg1.toInt();
+          motors.left(angle);
+          state = TURNING;
+        }
+        
+        if (pkt.comm == "RIGHT") {
+          int angle = pkt.arg1.toInt();
+          motors.right(angle);
+          state = TURNING;
+        }
+        
       }
     
   private:
+  
     Buzzer buzzer;
     Motor motors;
     UltrasonicSensor ultrasonicSensor;
     MovingAverage<unsigned int, 3> sensorAverage;
-    enum state_t { STOPPED, MOVING, OBSTACLE, TURNING, TURNED };
+    
+    enum state_t { STOPPED, MOVING, OBSTACLE, TURNING };
     state_t state;
     unsigned long startTime;
 };
       
 InBot inbot; 
 
-void initBluetooth() {
-    BTSerial.begin(38400);
-    // set the bluetooth work in slave mode
-    BTSerial.print("\r\n+STWMOD=0\r\n");
-    // set the bluetooth name as "SeeedBTSlave"
-    BTSerial.print("\r\n+STNA=SeeedBTSlave\r\n");
-    // Permit Paired device to connect me
-    BTSerial.print("\r\n+STOAUT=1\r\n"); 
-    // Auto-connection should be forbidden
-    BTSerial.print("\r\n+STAUTO=0\r\n"); 
-    // This delay is required.
-    delay(2000); 
-    // make the slave bluetooth inquirable
-    BTSerial.print("\r\n+INQ=1\r\n"); 
-    Serial.println("The slave bluetooth is inquirable!");
-    // This delay is required.
-    delay(2000); 
-    BTSerial.flush(); 
-}
-
 void setup() {
   Serial.begin(9600);
-  initBluetooth();
+  bluetooth.init();
   inbot.init();
 }
 

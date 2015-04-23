@@ -1,21 +1,15 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scrollView"
-    android:layout_gravity="center_horizontal">
+    android:gravity="center_vertical">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical">
+        android:id="@+id/webView"
+        android:layout_gravity="center_horizontal"/>
 
-        <WebView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/webView"
-            android:layout_gravity="center_horizontal"/>
+</LinearLayout>
 
-    </LinearLayout>
 
-</ScrollView>

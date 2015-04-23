@@ -1,139 +1,10 @@
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Blockly for Inbot</title>
-    <script src="js/blockly_compressed.js"></script>
-    <script src="js/blocks_compressed.js"></script>
-    <script src="js/inbot.js"></script>
-    <script src="js/en.js"></script>
-    <script src="js/acorn_interpreter.js"></script>
-    <script src="js/javascript_compressed.js"></script>
-    <script src="js/inbot_javascript.js"></script>
-    <style>
-      html, body {
-        background-color: #fff;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        height: 100%;
-      }
-      .blocklySvg {
-        height: 100%;
-        width: 100%;
-      }
-    </style>
-  </head>
-
-  <body>
-
-    <p>
-      <button onclick="parseCode()">Play</button>
-      <button onclick="stepCode()" id="stepButton" disabled="disabled">Step</button>
-    </p>
-
-    <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-
-    <xml id="toolbox" style="display: none">
-      <block type="inbot_move"></block>
-      <block type="inbot_forward"></block>
-      <block type="inbot_backward"></block>
-      <block type="inbot_left"></block>
-      <block type="inbot_right"></block>
-      <block type="inbot_stop"></block>
-    </xml>
-
-    <script>
-      Blockly.inject(document.getElementById('blocklyDiv'),
-        { media: 'media/',
-          toolbox: document.getElementById('toolbox')});
-
-      var myInterpreter = null;
-      var command = '0';
-
-      function initApi(interpreter, scope) {
-        // Add an API function for the alert() block.
-        var wrapper = function(text) {
-          text = text ? text.toString() : '';
-          command = text;
-          console.log(command);
-          // return interpreter.createPrimitive(alert(text));
-          // alert(command);
-          if (typeof Android != 'undefined')
-            Android.setCommand(command);
-          return null;
-        };
-        interpreter.setProperty(scope, 'alert',
-            interpreter.createNativeFunction(wrapper));
-
-        // Add an API function for the prompt() block.
-        var wrapper = function(text) {
-          text = text ? text.toString() : '';
-          return interpreter.createPrimitive(prompt(text));
-        };
-        interpreter.setProperty(scope, 'prompt',
-            interpreter.createNativeFunction(wrapper));
-
-        // Add an API function for highlighting blocks.
-        var wrapper = function(id) {
-          id = id ? id.toString() : '';
-          return interpreter.createPrimitive(highlightBlock(id));
-        };
-        interpreter.setProperty(scope, 'highlightBlock',
-            interpreter.createNativeFunction(wrapper));
-      }
-
-      var highlightPause = false;
-
-      function highlightBlock(id) {
-        Blockly.mainWorkspace.highlightBlock(id);
-        highlightPause = true;
-      }
-
-      function parseCode() {
-        // Generate JavaScript code and parse it.
-        Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-        Blockly.JavaScript.addReservedWords('highlightBlock');
-        var code = Blockly.JavaScript.workspaceToCode();
-        myInterpreter = new Interpreter(code, initApi);
-
-        //alert('Ready to execute this code:\n\n' + code);
-        document.getElementById('stepButton').disabled = '';
-        highlightPause = false;
-        Blockly.mainWorkspace.traceOn(true);
-        Blockly.mainWorkspace.highlightBlock(null);
-      }
-
-      function stepCode() {
-        try {
-          var ok = myInterpreter.step();
-          // alert(command);
-        } finally {
-          if (!ok) {
-            // Program complete, no more code to execute.
-            document.getElementById('stepButton').disabled = 'disabled';
-            command = '0';
-            return;
-          }
-        }
-        if (highlightPause) {
-          // A block has been highlighted.  Pause execution here.
-          highlightPause = false;
-        } else {
-          // Keep executing until a highlight statement is reached.
-          stepCode();
-
-        }
-      }
-
-    </script>
-  </body> 
-</html>  -->
-
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
+    "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <script src="js/blockly_compressed.js"></script>
   <script src="js/blocks_compressed.js"></script>
   <script src="js/en.js"></script>
@@ -157,25 +28,32 @@
 <body>
   <p>
     <button onclick="run()">Run</button>
-    <button onclick="reset()" id="resetButton" disabled="disabled">Reset</button>
   </p>
 
-  <div id="blocklyDiv" style="height: 220px; width: 600px;"></div>
+  <div id="blocklyDiv"></div>
 
   <xml id="toolbox" style="display: none">
-    <!-- <category name="Drive"> -->
-      <!-- <block type="drive_move"></block> -->
-    <!-- </category> -->
-    <!-- <category name="Sound"> -->
+    <category name="Drive">
+      <block type="drive_forward"></block>
+      <block type="drive_backward"></block>
+      <block type="drive_left"></block>
+      <block type="drive_right"></block>
+      <block type="drive_stop"></block>
+    </category>
+    <sep></sep>
+    <category name="Sound">
       <block type="sound_play"></block>
-    <!-- </category> -->
+    </category>
+    <sep></sep>
     <!-- <category name="Control"> -->
     <!-- </category> -->
   </xml>
 
   <script>
     Blockly.inject(document.getElementById('blocklyDiv'),
-                    { media: 'media/',
+                    { 
+                      scrollbars: false,
+                      media: 'media/',
                       toolbox: document.getElementById('toolbox')
                     } 
                   );
@@ -185,20 +63,45 @@
     function initApi(interpreter, scope) {
       // API
       var wrapper;
-      wrapper = function(distance) {
+      wrapper = function(time, distance) {
+        time = time ? time.toString() : '';
         distance = distance ? distance.toString() : '';
         if (typeof Android != 'undefined')
-          Android.moveForward(distance);
+          Android.forward(time, distance);
       };
-      interpreter.setProperty(scope, 'moveForward',
+      interpreter.setProperty(scope, 'forward',
       interpreter.createNativeFunction(wrapper));
   
-      wrapper = function(distance) {
+      wrapper = function(time, distance) {
+        time = time ? time.toString() : '';
         distance = distance ? distance.toString() : '';
         if (typeof Android != 'undefined')
-          Android.moveBackward(distance);
+          Android.backward(time, distance);
       };
-      interpreter.setProperty(scope, 'moveBackward',
+      interpreter.setProperty(scope, 'backward',
+      interpreter.createNativeFunction(wrapper));
+
+      wrapper = function(angle) {
+        angle = angle ? angle.toString() : '';
+        if (typeof Android != 'undefined')
+          Android.left(angle);
+      };
+      interpreter.setProperty(scope, 'left',
+      interpreter.createNativeFunction(wrapper));
+
+      wrapper = function(angle) {
+        angle = angle ? angle.toString() : '';
+        if (typeof Android != 'undefined')
+          Android.right(angle);
+      };
+      interpreter.setProperty(scope, 'right',
+      interpreter.createNativeFunction(wrapper));
+
+      wrapper = function() {
+        if (typeof Android != 'undefined')
+          Android.stopWheels();
+      };
+      interpreter.setProperty(scope, 'stopWheels',
       interpreter.createNativeFunction(wrapper));
 
       wrapper = function(note, beat) {
@@ -214,8 +117,16 @@
     function run() {
       var code = Blockly.JavaScript.workspaceToCode();
       myInterpreter = new Interpreter(code, initApi);
-      myInterpreter.run();
+      //myInterpreter.run();
+      nextStep();
     }
+
+    function nextStep() {
+      if (myInterpreter.step()) {
+        window.setTimeout(nextStep, 100);
+      }
+    }
+
 
   </script>
 

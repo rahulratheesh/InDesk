@@ -1,10 +1,39 @@
-Blockly.JavaScript['drive_move'] = function(block) {
-  var dropdown_move = block.getFieldValue('MOVE');
-  var dropdown_by = block.getFieldValue('BY');
+Blockly.JavaScript['drive_forward'] = function(block) {
+  var dropdown_time = block.getFieldValue('TIME');
+  var dropdown_speed = block.getFieldValue('SPEED');
   // TODO: Assemble JavaScript into code variable.
-  var code = dropdown_move + '(' + dropdown_by + ');\n';
+  var code = 'forward("' + dropdown_time + '","' + dropdown_speed + '");\n';
   return code;
 }; 
+
+Blockly.JavaScript['drive_backward'] = function(block) {
+  var dropdown_time = block.getFieldValue('TIME');
+  var dropdown_speed = block.getFieldValue('SPEED');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'backward("' + dropdown_time + '","' + dropdown_speed + '");\n';
+  return code;
+}; 
+
+Blockly.JavaScript['drive_left'] = function(block) {
+  var dropdown_angle = block.getFieldValue('ANGLE');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'left("' + dropdown_angle + '");\n';
+  return code;
+}; 
+
+Blockly.JavaScript['drive_right'] = function(block) {
+  var dropdown_angle = block.getFieldValue('ANGLE');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'right("' + dropdown_angle + '");\n';
+  return code;
+}; 
+
+
+Blockly.JavaScript['drive_stop'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'stopWheels();\n';
+  return code;
+};
 
 Blockly.JavaScript['sound_play'] = function(block) {
   var dropdown_note = block.getFieldValue('NOTE');

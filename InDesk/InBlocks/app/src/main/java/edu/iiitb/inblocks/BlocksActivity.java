@@ -179,29 +179,46 @@ public class BlocksActivity extends ActionBarActivity {
             mContext = c;
         }
 
-        /** Set a value from the webpage */
         @JavascriptInterface
-        public void moveForward(String distance) {
-            String msg = "moving forward by " + distance;
-            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-            mChatService.write(new byte[]{0x32});
-//            mChatService.write(new byte[]{0x30});
+        public void forward(String time, String distance) {
+            String msg = "FORWARD " + time + " " + distance + "\n";
+//            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+            mChatService.write(msg.getBytes());
         }
 
-        /** Set a value from the webpage */
         @JavascriptInterface
-        public void moveBackward(String distance) {
-            String msg = "moving backward by " + distance;
-            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-            mChatService.write(new byte[]{0x36});
-//            mChatService.write(new byte[]{0x30});
+        public void backward(String time,String distance) {
+            String msg = "BACKWARD " + time + " " + distance + "\n";
+//            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+            mChatService.write(msg.getBytes());
         }
+
+        @JavascriptInterface
+        public void left(String angle) {
+            String msg = "LEFT " + angle + " " + "?" + "\n";
+//            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+            mChatService.write(msg.getBytes());
+        }
+
+        @JavascriptInterface
+        public void right(String angle) {
+            String msg = "RIGHT " + angle + " " + "?" + "\n";
+//            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+            mChatService.write(msg.getBytes());
+        }
+
+        @JavascriptInterface
+        public void stopWheels() {
+            String msg = "STOP " + "?" + " " + "?" + "\n";
+//            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+            mChatService.write(msg.getBytes());
+        }
+
 
         @JavascriptInterface
         public void play(String note, String beat) {
             String msg = "PLAY " + note + " " + beat + "\n";
-            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-//            mChatService.write(msg);
+//            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
             mChatService.write(msg.getBytes());
         }
 

@@ -8,39 +8,31 @@ Motor::Motor() {
   pinMode(L_CTRL_2, OUTPUT);
 }
 
-void Motor::drive(int speed) {
-  if (speed > 0) {
-    leftFwd(speed);
-    rightFwd(speed);
-  }
-  if (speed < 0) {
-    leftRev(abs(speed));
-    rightRev(abs(speed));
-  }
-  if (speed == 0) {
-    leftStop();
-    rightStop();
-  }
+void Motor::forward(int time, int speed) {
+  leftFwd(speed);
+  rightFwd(speed);
+  delay(time);
 }
 
-void Motor::turn(int speed) {
-  if (speed > 0) {
-    leftFwd(speed);
-    rightRev(speed);
-  }
-  if (speed < 0) {
-    leftRev(speed);
-    rightFwd(speed);
-  }
-  if (speed == 0) {
-    leftStop();
-    rightStop();
-  }
+void Motor::backward(int time, int speed) {
+  leftRev(speed);
+  rightRev(speed);
+  delay(time);
 }
 
-int Motor::getSpeed() {
-  return speed;
+void Motor::stopWheels() {
+  leftStop();
+  rightStop();
 }
+
+void Motor::left(int time) {
+  turnLeft(time, 255);
+}
+
+void Motor::right(int time) {
+  turnRight(time, 255);
+}
+
 
 void Motor::leftFwd(int spd) {
   digitalWrite(L_CTRL_1, HIGH);
@@ -76,5 +68,17 @@ void Motor::rightStop() {
   digitalWrite(R_CTRL_1, LOW);
   digitalWrite(R_CTRL_2, LOW);
   analogWrite(PWM_R, 0);
+}
+
+void Motor::turnLeft(int time, int speed) {
+  rightFwd(speed);
+  leftStop();
+  delay(time);
+}
+
+void Motor::turnRight(int time, int speed) {
+  leftFwd(speed);
+  rightStop();
+  delay(time);
 }
 

@@ -9,15 +9,15 @@ class Wireless {
       
       packet() : comm(""), arg1(""), arg2("") {}
       
-      void set(String type, String note, String beat) {
-        comm = type;
-        arg1 = note;
-        arg2 = beat;
+      void set(String command, String argument1, String argument2) {
+        comm = command;
+        arg1 = argument1;
+        arg2 = argument2;
       }
       
     };
     
     Wireless() {}
     
-    virtual bool getRemoteCommand(packet& cmd) = 0;
+    virtual bool getRemoteCommand(packet& pkt) = 0;
 };
