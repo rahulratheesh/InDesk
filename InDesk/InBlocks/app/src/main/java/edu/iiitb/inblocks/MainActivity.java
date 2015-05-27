@@ -48,7 +48,8 @@ public class MainActivity extends ActionBarActivity {
             {
                 isVirtual = false;
                 Intent blocksActivityIntent = new Intent(MainActivity.this, BlocksActivity.class);
-                blocksActivityIntent.putExtra(EXTRA_DEVICE_ADDRESS, "00:13:EF:01:11:3D");
+//                blocksActivityIntent.putExtra(EXTRA_DEVICE_ADDRESS, "00:13:EF:01:11:3D");
+                blocksActivityIntent.putExtra(EXTRA_DEVICE_ADDRESS, "00:12:10:23:22:12");
                 startActivity(blocksActivityIntent);
             }
         });

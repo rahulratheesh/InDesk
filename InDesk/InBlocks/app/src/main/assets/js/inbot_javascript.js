@@ -42,3 +42,17 @@ Blockly.JavaScript['sound_play'] = function(block) {
   var code = 'play("' + dropdown_note + '",' + dropdown_beat + ');\n';
   return code;
 };
+
+Blockly.JavaScript['control_repeat'] = function(block) {
+  var repeats = block.getFieldValue('TIMES');
+  var branch = Blockly.JavaScript.statementToCode(block, 'DO');
+  // TODO: Assemble JavaScript into code variable.
+  branch = Blockly.JavaScript.addLoopTrap(branch, block.id);
+  var loopVar = Blockly.JavaScript.variableDB_.getDistinctName(
+        'count', Blockly.Variables.NAME_TYPE);
+  var code = 'for (var ' + loopVar + ' = 0; ' +
+        loopVar + ' < ' + repeats + '; ' +
+        loopVar + '++) {\n' +
+        branch + '}\n';
+  return code;
+};

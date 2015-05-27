@@ -16,6 +16,8 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class BlocksActivity extends ActionBarActivity {
 
@@ -49,10 +51,15 @@ public class BlocksActivity extends ActionBarActivity {
     // flag to check real or virtual robot
     private boolean isVirtual = true;
 
+    // command buffer
+    private ArrayList<String> mCommandBuffer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blocks);
+
+        mCommandBuffer = new ArrayList<String>();
 
         // check if device_address is available in the intent
         if ( getIntent() != null && getIntent().hasExtra("device_address")) {
@@ -73,7 +80,6 @@ public class BlocksActivity extends ActionBarActivity {
                     setupChat();
                     connectDevice();
             }
-
         }
 
         WebView myWebView = (WebView) findViewById(R.id.webView);
@@ -180,38 +186,59 @@ public class BlocksActivity extends ActionBarActivity {
         }
 
         @JavascriptInterface
+        public void start() {
+            mCommandBuffer.clear();
+        }
+
+        @JavascriptInterface
         public void forward(String time, String distance) {
             String msg = "FORWARD " + time + " " + distance + "\n";
 //            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-            mChatService.write(msg.getBytes());
+//            mChatService.write(msg.getBytes());
+            if (isVirtual)
+                mCommandBuffer.add(msg);
+            else
+                mChatService.write(msg.getBytes());
         }
 
         @JavascriptInterface
         public void backward(String time,String distance) {
             String msg = "BACKWARD " + time + " " + distance + "\n";
 //            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-            mChatService.write(msg.getBytes());
+            if (isVirtual)
+                mCommandBuffer.add(msg);
+            else
+                mChatService.write(msg.getBytes());
         }
 
         @JavascriptInterface
         public void left(String angle) {
             String msg = "LEFT " + angle + " " + "?" + "\n";
 //            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-            mChatService.write(msg.getBytes());
+            if (isVirtual)
+                mCommandBuffer.add(msg);
+            else
+                mChatService.write(msg.getBytes());
         }
 
         @JavascriptInterface
         public void right(String angle) {
             String msg = "RIGHT " + angle + " " + "?" + "\n";
 //            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-            mChatService.write(msg.getBytes());
+            if (isVirtual)
+                mCommandBuffer.add(msg);
+            else
+                mChatService.write(msg.getBytes());
         }
 
         @JavascriptInterface
         public void stopWheels() {
             String msg = "STOP " + "?" + " " + "?" + "\n";
 //            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-            mChatService.write(msg.getBytes());
+            if (isVirtual)
+                mCommandBuffer.add(msg);
+            else
+                mChatService.write(msg.getBytes());
         }
 
 
@@ -219,7 +246,21 @@ public class BlocksActivity extends ActionBarActivity {
         public void play(String note, String beat) {
             String msg = "PLAY " + note + " " + beat + "\n";
 //            Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-            mChatService.write(msg.getBytes());
+            if (isVirtual)
+                mCommandBuffer.add(msg);
+            else
+                mChatService.write(msg.getBytes());
+
+        }
+
+        @JavascriptInterface
+        public void finish()
+        {
+            if (isVirtual) {
+                Intent imageTargetsActivityIntent = new Intent(BlocksActivity.this, ImageTargets.class);
+                imageTargetsActivityIntent.putStringArrayListExtra("command_buffer", mCommandBuffer);
+                startActivity(imageTargetsActivityIntent);
+            }
         }
 
     }
