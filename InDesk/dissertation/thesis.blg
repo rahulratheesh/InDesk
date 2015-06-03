@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: thesis.aux
+The style file: abbrv.bst
+A level-1 auxiliary file: abstract.aux
+A level-1 auxiliary file: acknowledgments.aux
+A level-1 auxiliary file: Chapters/chap1.aux
+A level-1 auxiliary file: Chapters/chap2.aux
+A level-1 auxiliary file: Chapters/chap3.aux
+A level-1 auxiliary file: Chapters/chap4.aux
+A level-1 auxiliary file: Chapters/chap5.aux
+A level-1 auxiliary file: Chapters/chap6.aux
+A level-1 auxiliary file: Chapters/chap7.aux
+A level-1 auxiliary file: Chapters/chap8.aux
+A level-1 auxiliary file: Chapters/Appendix/apdxa.aux
+A level-1 auxiliary file: Chapters/Appendix/apdxb.aux
+Database file #1: ref.bib
+Warning--to sort, need author or key in irobot
+Warning--empty title in irobot
+You've used 6 entries,
+            2118 wiz_defined-function locations,
+            541 strings with 4630 characters,
+and the built_in function-call counts, 1745 in all, are:
+= -- 166
+> -- 75
+< -- 1
++ -- 30
+- -- 24
+* -- 113
+:= -- 286
+add.period$ -- 16
+call.type$ -- 6
+change.case$ -- 29
+chr.to.int$ -- 0
+cite$ -- 8
+duplicate$ -- 74
+empty$ -- 143
+format.name$ -- 24
+if$ -- 364
+int.to.chr$ -- 0
+int.to.str$ -- 6
+missing$ -- 6
+newline$ -- 31
+num.names$ -- 10
+pop$ -- 39
+preamble$ -- 1
+purify$ -- 24
+quote$ -- 0
+skip$ -- 54
+stack$ -- 0
+substring$ -- 93
+swap$ -- 16
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 22
+warning$ -- 2
+while$ -- 15
+width$ -- 7
+write$ -- 59
+(There were 2 warnings)

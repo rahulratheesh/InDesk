@@ -1,0 +1,97 @@
+@booklet{irobot,
+	url = {http://www.irobot.com/}
+}
+
+@Article{lego1,
+	author = {Brigandi, S. and Field, J. and Yunfeng Wang},
+	title = {A {LEGO} {M}indstorms {NXT} based multirobot system},
+	journal = {Advanced Intelligent Mechatronics (AIM)},
+	year = {2010},
+	OPTnumber = {135,139}
+}
+@Article{preop,
+	author = {J. Davies and B. L. Wellman and M. Anderson and M. Raines},
+	title = {Providing robotic experiences through object-based programming ({PREOP})},
+	journal = {Proceedings of the 2009 Alice Symposium},
+	year = {2009},
+	OPTpages = {1-7}
+}
+@Article{csmajors,
+	author = {Andrea Forte and Mark Guzdial},
+	title = {Motivation and {N}onmajors in {C}omputer {S}cience: {I}dentifying {D}iscrete 	{A}udiences for {I}ntroductory {C}ourses},
+	journal = {IEEE Transactions on education},
+	year = {2005},
+	OPTvolume = {48},
+	OPTnumber = {2},
+	OPTmonth = {May}
+}
+@booklet{eray,
+	url = {http://www.protocentral.com/robotics-kits/475-electric-ray-robot.html}
+}
+
+@Article{lego,
+	author = {Barry S. Fagin and Laurence D. Merkle and Thomas W. Eggers},
+	title = {Teaching Computer Science With Robotics Using {A}da/{M}indstorms 2.0},
+	journal = {ACM SIGAda Ada Letters},
+	year = {2001}
+}
+
+@Article{alice,
+	author = {Briana Lowe Wellman and James Davis and Monica Anderson},
+	title = {Alice and Robotics in Introductory CS Courses},
+	journal = {ACM New York},
+	year = {2009}
+}
+@Article{childRobot,
+	author = {S. Wagner},
+	title = {Robotics and Children: Science Achievement and Problem Solving},
+	journal = {Journal of Computing in Childhood Education},
+	year = {1998},
+	OPTvolume = {9(2)},
+	OPTnumber = {149–192}
+}
+@Article{girlsRobotics,
+	author = {C. Massey and G. Weaver and J. Ostrowski and T. Amos},
+	title = {Agents for change: {R}obotics for girls},
+	journal = {National Science Foundation, Division of Resource Development. Award},
+	year = {2000},
+	OPTvolume = {9976527}
+}
+@Article{youthHandson,
+	author = {K. Cannon and M. LaPoint and N. Bird and K. Panciera and H. Veeraraghavan and N. Papanikolopoulos and M. Gini},
+	title = {No {F}ear: {U}niversity of {M}innesota {R}obotics {D}ay {C}amp {I}ntroduces {L}ocal {Y}outh to {H}ands on {T}echnologies},
+	journal = {Proc. of the IEEE Intl. Conf. on Robotics and Automation (ICRA)},
+	year = {2006},
+	OPTpages = {363–368}
+}
+
+@book{lam1994,
+	title =		"\LaTeX: A Document Preparation System",
+	edition =	"Second",
+	author =	"Leslie Lamport",
+	publisher =	"Addison-Wesley Publishing Company",
+	year =		"1994",
+	isbn =		"0-201-52983-1",
+}
+
+@inproceedings{LastName1996,
+	author =	"FirstName LastName and FirstName I. LastName and
+			 F.N. {LastName Jr.}",
+	title =		"Conference Paper {MUN} Title",
+	booktitle =	"Proceedings of the Conference of Sample Conferences",
+	month =		"Apr.",
+	year =		"1996",
+	pages =		"100--110",
+	doi =		"put a real doi here, if you want.",
+}
+
+@article{someguy2002,
+	author =	"First-name Last-name and Some Guy",
+	title =		"Journal Article {SWGC} Title",
+	journal =	"Journal of Sample Journals",
+	volume =	"1",
+	number =	"12",
+	year =		"2002",
+	pages =		"1000--1024",
+	publisher =	"Sample Publisher",
+}

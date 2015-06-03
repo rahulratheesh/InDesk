@@ -1,0 +1,7 @@
+% abstract.tex
+
+\begin{center}
+\textbf{\large Abstract}
+\end{center}
+
+\emph{``In the research process, attempt is to build a new interactive educational-product for children so as to inspire the children's interest in learning programming. The research objective in this thesis is an educational platform for children which can interact through programming. Two versions of the platform is made available, one a readymade platform called the Electric Ray and another an easily buildable robotic platform, known as the Inventor's Bot or InBot thus giving a hands on experience in introductory robotics as well. A visual programming environment known as Inventor's Blocks or InBlocks is also developed for desktop and mobile devices. The final result indicated that there is a promising and huge market potential to apply the new interactive technology to the development of educational robots.''}

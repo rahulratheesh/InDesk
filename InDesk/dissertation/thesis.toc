@@ -1,0 +1,35 @@
+\contentsline {chapter}{Abstract}{iii}
+\contentsline {chapter}{Acknowledgements}{iv}
+\contentsline {chapter}{List of Figures}{vii}
+\contentsline {chapter}{List of Tables}{ix}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {chapter}{\numberline {2}MiniBloq}{5}
+\contentsline {section}{\numberline {2.1}Introduction}{5}
+\contentsline {section}{\numberline {2.2}Enhancement for robotic platform}{5}
+\contentsline {chapter}{\numberline {3}Electric Ray Robot}{9}
+\contentsline {chapter}{\numberline {4}InBot}{10}
+\contentsline {chapter}{\numberline {5}AR}{11}
+\contentsline {chapter}{\numberline {6}Conclusions}{12}
+\contentsline {chapter}{\numberline {7}Augmented Reality}{13}
+\contentsline {section}{\numberline {7.1}Vuforia Augmented Reality SDK}{14}
+\contentsline {section}{\numberline {7.2}Vuforia SDK Configuration}{15}
+\contentsline {section}{\numberline {7.3}Creating the virtual content}{16}
+\contentsline {subsection}{\numberline {7.3.1}3D Modeling}{17}
+\contentsline {subsection}{\numberline {7.3.2}Texture Mapping}{18}
+\contentsline {subsection}{\numberline {7.3.3}Exporting the 3D Model}{19}
+\contentsline {chapter}{\numberline {8}InBot}{20}
+\contentsline {section}{\numberline {8.1}InBot Hardware}{21}
+\contentsline {section}{\numberline {8.2}InBot Assembly}{23}
+\contentsline {chapter}{Bibliography}{29}
+\contentsline {chapter}{\numberline {A}MinBloq Programming Manual}{30}
+\contentsline {section}{\numberline {A.1}Hello World}{30}
+\contentsline {section}{\numberline {A.2}Delays}{31}
+\contentsline {section}{\numberline {A.3}Variables}{32}
+\contentsline {section}{\numberline {A.4}If Statements}{33}
+\contentsline {section}{\numberline {A.5}While loop}{34}
+\contentsline {section}{\numberline {A.6}Repeat Loop}{35}
+\contentsline {section}{\numberline {A.7}Movement}{36}
+\contentsline {section}{\numberline {A.8}Obstacle Sensor}{37}
+\contentsline {section}{\numberline {A.9}IR Sensor}{38}
+\contentsline {section}{\numberline {A.10}Buzzer}{39}
+\contentsline {chapter}{\numberline {B}Appendix: How to Add Another One}{41}

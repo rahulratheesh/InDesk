@@ -1,0 +1,32 @@
+\begin{thebibliography}{1}
+
+\bibitem{irobot}
+
+
+\bibitem{lego}
+B.~S. Fagin, L.~D. Merkle, and T.~W. Eggers.
+\newblock Teaching computer science with robotics using {A}da/{M}indstorms 2.0.
+\newblock {\em ACM SIGAda Ada Letters}, 2001.
+
+\bibitem{lam1994}
+L.~Lamport.
+\newblock {\em \LaTeX: A Document Preparation System}.
+\newblock Addison-Wesley Publishing Company, second edition, 1994.
+
+\bibitem{LastName1996}
+F.~LastName, F.~I. LastName, and F.~{LastName Jr.}
+\newblock Conference paper {MUN} title.
+\newblock In {\em Proceedings of the Conference of Sample Conferences}, pages
+  100--110, Apr. 1996.
+
+\bibitem{someguy2002}
+F.~name Last-name and S.~Guy.
+\newblock Journal article {SWGC} title.
+\newblock {\em Journal of Sample Journals}, 1(12):1000--1024, 2002.
+
+\bibitem{alice}
+B.~L. Wellman, J.~Davis, and M.~Anderson.
+\newblock Alice and robotics in introductory cs courses.
+\newblock {\em ACM New York}, 2009.
+
+\end{thebibliography}
