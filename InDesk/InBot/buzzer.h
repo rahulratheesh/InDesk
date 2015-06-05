@@ -1,7 +1,7 @@
 #ifndef BUZZER_H
 #define BUZZER_H
 
-#define BUZZER_PIN 8
+#define BUZZER_PIN 4
 
 class Buzzer {
   

@@ -4,7 +4,9 @@ class UltrasonicSensor : public Sensor {
   
   public:
     UltrasonicSensor(int triggerPin, int echoPin, int maxDistance)
-    : Sensor(maxDistance), sensor(triggerPin, echoPin, maxDistance) {}
+    : Sensor(maxDistance), sensor(triggerPin, echoPin, maxDistance) {
+    obstacleDetection = false;
+    }
 
     virtual unsigned int getDistance() {
       int distance = sensor.ping_cm();
@@ -12,7 +14,7 @@ class UltrasonicSensor : public Sensor {
           return maxDistance;
        return distance;
     }
-     
+         
     private:
       NewPing sensor;
 };

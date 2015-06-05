@@ -11,8 +11,9 @@ class Sensor {
    * @return the distance to the closest object in centimeters 
    *   or maxDistance if no object was detected
    */
-    virtual unsigned int getDistance() = 0;
+    virtual unsigned int getDistance() = 0;    
 
 protected:
     unsigned int maxDistance;
+    boolean obstacleDetection;
 };

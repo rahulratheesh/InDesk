@@ -7,6 +7,7 @@ Buzzer::Buzzer() {
 }
 
 void Buzzer::playNote(char note, int beat) {
+ 
   int freq = getFrequency(note);
   if (freq == -1) {
     // not supported

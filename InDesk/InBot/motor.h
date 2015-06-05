@@ -4,13 +4,11 @@
 #include <Arduino.h>
 
 // Pin aliases for the motor controller.
-#define L_CTRL_1 2
-#define L_CTRL_2 4
+#define L_CTRL_1 12
 #define PWM_L 3
 
-#define R_CTRL_1 7
-#define R_CTRL_2 5
-#define PWM_R 6
+#define R_CTRL_1 11
+#define PWM_R 5
 
 class Motor
 {

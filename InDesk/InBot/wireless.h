@@ -3,6 +3,7 @@ class Wireless {
   public:
     
     struct packet {
+      
       String comm;
       String arg1;
       String arg2;
@@ -14,7 +15,6 @@ class Wireless {
         arg1 = argument1;
         arg2 = argument2;
       }
-      
     };
     
     Wireless() {}
